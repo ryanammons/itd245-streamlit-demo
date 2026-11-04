@@ -8,13 +8,12 @@ import datetime as dt
 
 @st.cache_data
 def load_data() -> pd.DataFrame:
-    """Simulate a sales table — replace with your real query / CSV / DB call."""
     rng = np.random.default_rng(42)
     n = 500
+    # Build a pool of the last 366 days, then pick random dates from it
+    pool = pd.date_range(end=dt.date.today(), periods=366, freq="D")
     return pd.DataFrame({
-        "order_date": pd.to_datetime(rng.integers(
-            dt.date.today() - dt.timedelta(days=365),
-            dt.date.today() + 1, n, dtype="datetime64")),
+        "order_date": pool[rng.integers(0, len(pool), n)],
         "region":  rng.choice(["N", "S", "E", "W"], n),
         "product": rng.choice(["Widget", "Gadget", "Gizmo"], n),
         "sales":   rng.normal(100, 25, n).clip(5).round(2),
