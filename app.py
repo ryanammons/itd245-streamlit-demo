@@ -13,7 +13,7 @@ def load_data() -> pd.DataFrame:
     return pd.DataFrame({
         "order_date": pd.to_datetime(rng.integers(
             dt.date.today() - dt.timedelta(days=365),
-            dt.date.today() + 1, n, dtype="datetime64[D"])),
+            dt.date.today() + 1, n, dtype="datetime64"])),
         "region":  rng.choice(["N", "S", "E", "W"], n),
         "product": rng.choice(["Widget", "Gadget", "Gizmo"], n),
         "sales":   rng.normal(100, 25, n).clip(5).round(2),
