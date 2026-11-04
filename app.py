@@ -4,11 +4,14 @@ import plotly.express as px
 
 st.set_page_config(page_title='Sales', layout='wide')
 
+start_date = dt.date.today() - dt.timedelta(days=30)
+end_date   = dt.date.today()
+
 # Sidebar  - global filters
 with st.sidebar:
   st.header('Filters')
   region = st.selectbox('Region', ['All', 'N', 'S', 'E', 'W'])
-  date_range = st.date_input('Date range', value=(...))
+  date_range = st.date_input('Date range', value=(start_date, end_date))
 
 # Main area
 st.title('Sales dashboard')
